@@ -76,7 +76,7 @@ const FinanceBudget = () => {
               </p>
             </div>
 
-            {/* Budget Calculator */}
+            {}
             <Card className="p-8 mb-12 shadow-lg">
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
@@ -210,7 +210,7 @@ const FinanceBudget = () => {
               </div>
             </Card>
 
-            {/* Affordable Vehicles */}
+            {}
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-6">
                 Vehicles Within Your Budget ({affordableVehicles.length})

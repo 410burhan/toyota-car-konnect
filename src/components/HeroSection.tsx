@@ -8,7 +8,7 @@ export const HeroSection = () => {
   
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Image */}
+      {}
       <div className="absolute inset-0">
         <img
           src={heroCamry}
@@ -18,7 +18,7 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
       </div>
 
-      {/* Content */}
+      {}
       <div className="relative h-full container mx-auto px-4 flex items-center">
         <div className="max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <div className="inline-block">
@@ -60,7 +60,7 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-3 bg-white/50 rounded-full" />

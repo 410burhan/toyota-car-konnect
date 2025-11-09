@@ -24,7 +24,7 @@ export const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {}
           <div className="flex items-center space-x-8">
             <button onClick={() => navigate("/")} className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
               TOYOTA
@@ -45,7 +45,7 @@ export const Header = () => {
             </nav>
           </div>
 
-          {/* Actions */}
+          {}
           <div className="flex items-center space-x-4">
             <Button variant="ghost" size="icon" className="hidden md:flex">
               <Search className="h-5 w-5" />
@@ -66,7 +66,7 @@ export const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {}
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 space-y-3">
             <button onClick={() => scrollToSection("vehicles")} className="block w-full text-left text-sm font-medium text-foreground hover:text-primary transition-colors">
