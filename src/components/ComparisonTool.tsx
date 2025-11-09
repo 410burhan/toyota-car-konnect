@@ -39,7 +39,7 @@ export const ComparisonTool = () => {
     if (!newCar) return;
 
     // Replace the 3rd car
-    setDisplayedCars((prev) => [prev[0], prev[1], newCar]);
+    setDisplayedCars((prev) => [prev[1], prev[2], newCar]);
 
     // Trigger burst animation on new card
     setHighlightedCarId(newCar.id);
