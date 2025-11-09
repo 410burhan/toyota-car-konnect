@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -11,19 +11,28 @@ export const ComparisonTool = () => {
 
   // Display first 3 cars by default
   const [displayedCars, setDisplayedCars] = useState<Car[]>(cars.slice(0, 3));
-
-  // Show/hide selector for additional vehicles
   const [showSelector, setShowSelector] = useState(false);
-
-  // Track which car should have the burst animation
   const [highlightedCarId, setHighlightedCarId] = useState<string | null>(null);
 
-  const specs = [
+  type SpecKey = keyof Pick<Car, "price" | "mpg" | "hp" | "seating">;
+  type Spec = { label: string; key: SpecKey };
+
+  const specs: Spec[] = [
     { label: "Starting Price", key: "price" },
     { label: "Est. MPG", key: "mpg" },
-    { label: "Horsepower", key: "horsepower" },
+    { label: "Horsepower", key: "hp" },
     { label: "Seating", key: "seating" },
   ];
+
+  // Compute best values for each spec
+  const bestValues = useMemo(() => {
+    const best: Partial<Record<SpecKey, number>> = {};
+    specs.forEach((spec) => {
+      const values = displayedCars.map((v) => v[spec.key] as number);
+      best[spec.key] = spec.key === "price" ? Math.min(...values) : Math.max(...values);
+    });
+    return best;
+  }, [displayedCars]);
 
   const handleSelectVehicle = (newCarId: string) => {
     const newCar = cars.find((c) => c.id === newCarId);
@@ -32,10 +41,9 @@ export const ComparisonTool = () => {
     // Replace the 3rd car
     setDisplayedCars((prev) => [prev[0], prev[1], newCar]);
 
-    // Trigger animation on new card
+    // Trigger burst animation on new card
     setHighlightedCarId(newCar.id);
     setTimeout(() => setHighlightedCarId(null), 1000);
-    
 
     setShowSelector(false);
   };
@@ -56,10 +64,7 @@ export const ComparisonTool = () => {
         {/* Display cars */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {displayedCars.map((vehicle) => (
-            <Card
-              key={vehicle.id}
-              className="overflow-hidden shadow-md relative" // important for overlay
-            >
+            <Card key={vehicle.id} className="overflow-hidden shadow-md relative">
               {/* Gradient burst overlay */}
               {highlightedCarId === vehicle.id && (
                 <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center">
@@ -80,17 +85,25 @@ export const ComparisonTool = () => {
               </div>
 
               <div className="p-6 space-y-4 relative z-10">
-                {specs.map((spec) => (
-                  <div
-                    key={spec.key}
-                    className="flex justify-between items-center border-b border-border pb-2"
-                  >
-                    <span className="text-sm text-muted-foreground">{spec.label}</span>
-                    <span className="font-semibold text-foreground">
-                      {vehicle[spec.key as keyof typeof vehicle] ?? "-"}
-                    </span>
-                  </div>
-                ))}
+                {specs.map((spec) => {
+                  const isBest =
+                    (spec.key === "price"
+                      ? Number(vehicle[spec.key]) === bestValues[spec.key]
+                      : Number(vehicle[spec.key]) === bestValues[spec.key]);
+                  return (
+                    <div
+                      key={spec.key}
+                      className={`flex justify-between items-center border-b border-border pb-2 ${
+                        isBest ? "bg-red-100/30 rounded px-1 py-0.5 font-semibold": ""
+                      }`}
+                    >
+                      <span className="text-sm text-muted-foreground">{spec.label}</span>
+                      <span className="font-semibold text-foreground">
+                        {vehicle[spec.key as keyof typeof vehicle] ?? "-"}
+                      </span>
+                    </div>
+                  );
+                })}
 
                 <div className="pt-4">
                   <p className="text-sm font-semibold text-foreground mb-3">
@@ -138,10 +151,7 @@ export const ComparisonTool = () => {
               {cars
                 .filter((car) => !displayedCars.some((v) => v.id === car.id))
                 .map((car) => (
-                  <Button
-                    key={car.id}
-                    onClick={() => handleSelectVehicle(car.id)}
-                  >
+                  <Button key={car.id} onClick={() => handleSelectVehicle(car.id)}>
                     {car.name}
                   </Button>
                 ))}
