@@ -14,6 +14,7 @@ export const VehicleShowcase = () => {
         price: "$28,400",
         mpg: "32",
         isHybrid: false,
+        slug: "camry",
       },
       {
         name: "Camry Hybrid",
@@ -22,6 +23,7 @@ export const VehicleShowcase = () => {
         price: "$29,800",
         mpg: "52",
         isHybrid: true,
+        slug: "camry-hybrid",
       },
     ],
     suvs: [
@@ -32,6 +34,7 @@ export const VehicleShowcase = () => {
         price: "$33,800",
         mpg: "40",
         isHybrid: true,
+        slug: "rav4-hybrid",
       },
       {
         name: "Highlander",
@@ -40,6 +43,7 @@ export const VehicleShowcase = () => {
         price: "$38,500",
         mpg: "24",
         isHybrid: false,
+        slug: "highlander",
       },
     ],
     trucks: [
@@ -50,6 +54,7 @@ export const VehicleShowcase = () => {
         price: "$31,900",
         mpg: "20",
         isHybrid: false,
+        slug: "tacoma",
       },
       {
         name: "Tundra",
@@ -58,6 +63,7 @@ export const VehicleShowcase = () => {
         price: "$42,500",
         mpg: "19",
         isHybrid: false,
+        slug: "tundra",
       },
     ],
   };

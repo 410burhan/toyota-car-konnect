@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Calculator, TrendingDown } from "lucide-react";
 
 export const FinanceCalculator = () => {
+  const navigate = useNavigate();
   const [vehiclePrice, setVehiclePrice] = useState(30000);
   const [downPayment, setDownPayment] = useState(5000);
   const [interestRate, setInterestRate] = useState(4.5);
@@ -135,7 +137,11 @@ export const FinanceCalculator = () => {
                   </div>
                 </div>
 
-                <Button className="w-full" size="lg">
+                <Button 
+                  className="w-full" 
+                  size="lg"
+                  onClick={() => navigate("/finance-budget")}
+                >
                   <TrendingDown className="mr-2 h-5 w-5" />
                   Get Pre-Approved
                 </Button>

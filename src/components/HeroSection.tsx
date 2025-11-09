@@ -1,8 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Play } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroCamry from "@/assets/hero-camry.jpg";
 
 export const HeroSection = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image */}
@@ -38,6 +41,7 @@ export const HeroSection = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-red group"
+              onClick={() => navigate("/build-and-price?vehicle=camry")}
             >
               Build & Price
               <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -47,9 +51,10 @@ export const HeroSection = () => {
               size="lg" 
               variant="outline"
               className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20"
+              onClick={() => document.getElementById("vehicles")?.scrollIntoView({ behavior: "smooth" })}
             >
               <Play className="mr-2 h-5 w-5" />
-              Watch Video
+              Explore Vehicles
             </Button>
           </div>
         </div>

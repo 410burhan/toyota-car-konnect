@@ -2,8 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, X, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const ComparisonTool = () => {
+  const navigate = useNavigate();
+  
   const comparison = [
     {
       name: "Camry Hybrid",
@@ -90,7 +93,15 @@ export const ComparisonTool = () => {
                   </ul>
                 </div>
 
-                <Button className="w-full mt-6">Select & Configure</Button>
+                <Button 
+                  className="w-full mt-6"
+                  onClick={() => {
+                    const slug = vehicle.name.toLowerCase().replace(/\s+/g, "-");
+                    navigate(`/build-and-price?vehicle=${slug}`);
+                  }}
+                >
+                  Select & Configure
+                </Button>
               </div>
             </Card>
           ))}

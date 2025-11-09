@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface VehicleCardProps {
   name: string;
@@ -10,9 +11,17 @@ interface VehicleCardProps {
   price: string;
   mpg: string;
   isHybrid?: boolean;
+  slug?: string;
 }
 
-export const VehicleCard = ({ name, type, image, price, mpg, isHybrid }: VehicleCardProps) => {
+export const VehicleCard = ({ name, type, image, price, mpg, isHybrid, slug }: VehicleCardProps) => {
+  const navigate = useNavigate();
+  
+  const getSlug = () => {
+    if (slug) return slug;
+    return name.toLowerCase().replace(/\s+/g, "-");
+  };
+
   return (
     <Card className="group overflow-hidden border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-card">
       <div className="relative overflow-hidden">
@@ -47,11 +56,18 @@ export const VehicleCard = ({ name, type, image, price, mpg, isHybrid }: Vehicle
         </div>
         
         <div className="flex gap-2 pt-2">
-          <Button className="flex-1 group/btn">
+          <Button 
+            className="flex-1 group/btn"
+            onClick={() => navigate(`/build-and-price?vehicle=${getSlug()}`)}
+          >
             Build & Price
             <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="outline" className="flex-1">
+          <Button 
+            variant="outline" 
+            className="flex-1"
+            onClick={() => navigate("/?section=compare")}
+          >
             Compare
           </Button>
         </div>
