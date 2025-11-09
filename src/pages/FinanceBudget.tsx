@@ -9,6 +9,7 @@ import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, DollarSign, TrendingUp, Check } from "lucide-react";
+import { cars, Car } from "@/data/cars";
 import heroCamry from "@/assets/hero-camry.jpg";
 import rav4Hybrid from "@/assets/rav4-hybrid.jpg";
 import tacomaTruck from "@/assets/tacoma-truck.jpg";
@@ -39,16 +40,9 @@ const FinanceBudget = () => {
 
   const maxPrice = calculateMaxPrice();
 
-  const allVehicles = [
-    { name: "Camry", type: "Sedan", image: heroCamry, price: "$28,400", priceNum: 28400, mpg: "32", slug: "camry" },
-    { name: "Camry Hybrid", type: "Sedan", image: heroCamry, price: "$29,800", priceNum: 29800, mpg: "52", isHybrid: true, slug: "camry-hybrid" },
-    { name: "RAV4 Hybrid", type: "SUV", image: rav4Hybrid, price: "$33,800", priceNum: 33800, mpg: "40", isHybrid: true, slug: "rav4-hybrid" },
-    { name: "Highlander", type: "SUV", image: rav4Hybrid, price: "$38,500", priceNum: 38500, mpg: "24", slug: "highlander" },
-    { name: "Tacoma", type: "Truck", image: tacomaTruck, price: "$31,900", priceNum: 31900, mpg: "20", slug: "tacoma" },
-    { name: "Tundra", type: "Truck", image: tacomaTruck, price: "$42,500", priceNum: 42500, mpg: "19", slug: "tundra" },
-  ];
+  const allVehicles = cars;
 
-  const affordableVehicles = allVehicles.filter(v => v.priceNum <= maxPrice);
+  const affordableVehicles = allVehicles.filter(v => Number(v.price) <= maxPrice);
 
   return (
     <div className="min-h-screen bg-background">
@@ -219,7 +213,7 @@ const FinanceBudget = () => {
               {affordableVehicles.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {affordableVehicles.map((vehicle) => (
-                    <VehicleCard key={vehicle.slug} {...vehicle} />
+                    <VehicleCard key={vehicle.id} {...vehicle} />
                   ))}
                 </div>
               ) : (

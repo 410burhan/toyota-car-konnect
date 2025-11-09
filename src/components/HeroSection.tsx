@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import heroCamry from "@/assets/hero-camry.jpg";
+import heroSupra from "@/assets/new/hero-supra.jpg";
 
 export const HeroSection = () => {
   const navigate = useNavigate();
@@ -11,8 +11,8 @@ export const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={heroCamry}
-          alt="Toyota Camry"
+          src={heroSupra}
+          alt="Toyota Supra 2025 mk5"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
@@ -22,8 +22,8 @@ export const HeroSection = () => {
       <div className="relative h-full container mx-auto px-4 flex items-center">
         <div className="max-w-2xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <div className="inline-block">
-            <span className="text-accent font-semibold text-sm tracking-wider uppercase">
-              New 2025 Camry
+            <span className="text-primary font-semibold text-sm tracking-wider uppercase">
+              New 2025 Toyota GR Supra MkV Final Edition
             </span>
           </div>
           

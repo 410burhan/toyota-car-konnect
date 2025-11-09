@@ -8,6 +8,7 @@ import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Check, Palette, Settings, Package } from "lucide-react";
+import { cars, Car } from "@/data/cars";
 import heroCamry from "@/assets/hero-camry.jpg";
 import rav4Hybrid from "@/assets/rav4-hybrid.jpg";
 import tacomaTruck from "@/assets/tacoma-truck.jpg";
@@ -16,18 +17,19 @@ const BuildAndPrice = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const vehicleParam = searchParams.get("vehicle") || "camry";
-  
-  const vehicles: Record<string, any> = {
-    camry: { name: "Camry", type: "Sedan", basePrice: 28400, image: heroCamry, mpg: "32" },
-    "camry-hybrid": { name: "Camry Hybrid", type: "Sedan", basePrice: 29800, image: heroCamry, mpg: "52", isHybrid: true },
-    "rav4-hybrid": { name: "RAV4 Hybrid", type: "SUV", basePrice: 33800, image: rav4Hybrid, mpg: "40", isHybrid: true },
-    highlander: { name: "Highlander", type: "SUV", basePrice: 38500, image: rav4Hybrid, mpg: "24" },
-    tacoma: { name: "Tacoma", type: "Truck", basePrice: 31900, image: tacomaTruck, mpg: "20" },
-    tundra: { name: "Tundra", type: "Truck", basePrice: 42500, image: tacomaTruck, mpg: "19" },
-  };
 
+
+  type carRecords = Record<string, Car>;
+  const vehicles: carRecords = cars.reduce((acc, car) => {
+    acc[car.id] = car;
+    return acc;
+  }, {} as carRecords);
   const vehicle = vehicles[vehicleParam] || vehicles.camry;
   
+  console.log("vehicleParam:", vehicleParam);
+  console.log("vehicles keys:", Object.keys(vehicles));
+  console.log("lookup:", vehicles[vehicleParam]);
+
   const [selectedTrim, setSelectedTrim] = useState("LE");
   const [selectedColor, setSelectedColor] = useState("Silver");
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
@@ -58,7 +60,7 @@ const BuildAndPrice = () => {
     return sum + (found?.price || 0);
   }, 0);
 
-  const totalPrice = vehicle.basePrice + getTrimPrice() + getPackagesPrice();
+  const totalPrice = Number(vehicle.price) + getTrimPrice() + getPackagesPrice();
 
   const togglePackage = (pkgName: string) => {
     setSelectedPackages(prev => 

@@ -1,72 +1,30 @@
 import { VehicleCard } from "./VehicleCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cars, Car } from "@/data/cars";
 import heroCamry from "@/assets/hero-camry.jpg";
 import rav4Hybrid from "@/assets/rav4-hybrid.jpg";
 import tacomaTruck from "@/assets/tacoma-truck.jpg";
 
+
 export const VehicleShowcase = () => {
-  const vehicles = {
-    sedans: [
-      {
-        name: "Camry",
-        type: "Sedan",
-        image: heroCamry,
-        price: "$28,400",
-        mpg: "32",
-        isHybrid: false,
-        slug: "camry",
-      },
-      {
-        name: "Camry Hybrid",
-        type: "Sedan",
-        image: heroCamry,
-        price: "$29,800",
-        mpg: "52",
-        isHybrid: true,
-        slug: "camry-hybrid",
-      },
-    ],
-    suvs: [
-      {
-        name: "RAV4 Hybrid",
-        type: "SUV",
-        image: rav4Hybrid,
-        price: "$33,800",
-        mpg: "40",
-        isHybrid: true,
-        slug: "rav4-hybrid",
-      },
-      {
-        name: "Highlander",
-        type: "SUV",
-        image: rav4Hybrid,
-        price: "$38,500",
-        mpg: "24",
-        isHybrid: false,
-        slug: "highlander",
-      },
-    ],
-    trucks: [
-      {
-        name: "Tacoma",
-        type: "Truck",
-        image: tacomaTruck,
-        price: "$31,900",
-        mpg: "20",
-        isHybrid: false,
-        slug: "tacoma",
-      },
-      {
-        name: "Tundra",
-        type: "Truck",
-        image: tacomaTruck,
-        price: "$42,500",
-        mpg: "19",
-        isHybrid: false,
-        slug: "tundra",
-      },
-    ],
+// ...existing code...
+  // dynamically group cars from /src/data/cars
+  const categoryMap: Record<string, string> = {
+    Sedan: "sedans",
+    SUV: "suvs",
+    Truck: "trucks",
   };
+
+  type Vehicle = (typeof cars)[number];
+
+  const vehicles = cars.reduce<Record<string, Car[]>>((acc, car) => {
+    const key = car.type.toLowerCase() + "s"; 
+    if (!acc[key]) acc[key] = []; // initialize if missing
+    acc[key].push(car); // add car to the category
+    return acc;
+  }, {} as Record<string, Car[]>); // start with an empty object
+
+  const categories = Object.keys(vehicles);
 
   return (
     <section id="vehicles" className="py-20 bg-background">
@@ -81,15 +39,25 @@ export const VehicleShowcase = () => {
         </div>
 
         <Tabs defaultValue="sedans" className="w-full">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-8">
-            <TabsTrigger value="sedans">Sedans</TabsTrigger>
-            <TabsTrigger value="suvs">SUVs</TabsTrigger>
-            <TabsTrigger value="trucks">Trucks</TabsTrigger>
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-4 mb-8">
+            {categories.map((cat) => (
+              <TabsTrigger key={cat} value={cat}>
+                {cat.charAt(0).toUpperCase() + cat.slice(1)} {/* Capitalize */}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           <TabsContent value="sedans" className="mt-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
               {vehicles.sedans.map((vehicle) => (
+                <VehicleCard key={vehicle.name} {...vehicle} />
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="coupes" className="mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+              {vehicles.coupes.map((vehicle) => (
                 <VehicleCard key={vehicle.name} {...vehicle} />
               ))}
             </div>

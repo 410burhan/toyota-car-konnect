@@ -93,10 +93,18 @@ export default {
             height: "0",
           },
         },
+        "burst-scale": {
+          "0%": { transform: "scale(0.8)", opacity: "0" },
+          "40%": { transform: "scale(1.1)", opacity: "0.5" },
+          "70%": { transform: "scale(1.05)", opacity: "0.3" },
+          "100%": { transform: "scale(1)", opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "burst-scale": "burst-scale 0.8s ease-out forwards",
+
       },
     },
   },

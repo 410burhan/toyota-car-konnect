@@ -3,24 +3,14 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Car }  from "@/data/cars";
 
-interface VehicleCardProps {
-  name: string;
-  type: string;
-  image: string;
-  price: string;
-  mpg: string;
-  isHybrid?: boolean;
-  slug?: string;
-}
 
-export const VehicleCard = ({ name, type, image, price, mpg, isHybrid, slug }: VehicleCardProps) => {
+export const VehicleCard = ({id, name, image, price, mpg, isHybrid, type}: Car) => {
   const navigate = useNavigate();
   
-  const getSlug = () => {
-    if (slug) return slug;
-    return name.toLowerCase().replace(/\s+/g, "-");
-  };
+  const getSlug = () => id;
+
 
   return (
     <Card className="group overflow-hidden border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-card">
@@ -47,7 +37,7 @@ export const VehicleCard = ({ name, type, image, price, mpg, isHybrid, slug }: V
         <div className="flex items-center justify-between text-sm">
           <div>
             <p className="text-muted-foreground">Starting at</p>
-            <p className="text-xl font-bold text-primary">{price}</p>
+            <p className="text-xl font-bold text-primary">${Number(price).toLocaleString()}</p>
           </div>
           <div className="text-right">
             <p className="text-muted-foreground">Est. MPG</p>
