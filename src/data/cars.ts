@@ -4,7 +4,7 @@ import rav4Hybrid from "@/assets/new/toyota_rav4_hybrid_2019_4k-1920x1080.jpg";
 import tundraTruck from "@/assets/new/toyota_tundra_limited_crewmax_2024_4k_hd_cars-1920x1080.jpg";
 import tacomaTruck from "@/assets/new/tacoma.jpg";
 import camryWhiteHybrid from "@/assets/new/HybridCamryWhite.jpg";
-import correcthighlander from "@/assets/new/correcthighlander.avif";
+import correcthighlander from "@/assets/new/correctHighlander.avif";
 import supra from "@/assets/new/supra.avif";
 
 export interface Car {
