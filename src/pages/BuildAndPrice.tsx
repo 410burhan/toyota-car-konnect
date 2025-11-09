@@ -85,7 +85,7 @@ const BuildAndPrice = () => {
           </Button>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            {/* Left Side - Configuration */}
+            {}
             <div className="space-y-6">
               <div>
                 <h1 className="text-4xl font-bold text-foreground mb-2">
@@ -98,7 +98,7 @@ const BuildAndPrice = () => {
 
               <Card className="p-6 bg-gradient-card shadow-md">
                 <div className="space-y-6">
-                  {/* Price Summary */}
+                  {}
                   <div className="bg-gradient-hero text-white p-6 rounded-lg">
                     <div className="flex justify-between items-center">
                       <div>
@@ -112,7 +112,7 @@ const BuildAndPrice = () => {
                     </div>
                   </div>
 
-                  {/* Tabs for configuration */}
+                  {}
                   <Tabs defaultValue="trim" className="w-full">
                     <TabsList className="grid w-full grid-cols-3">
                       <TabsTrigger value="trim">
@@ -250,7 +250,7 @@ const BuildAndPrice = () => {
               </Card>
             </div>
 
-            {/* Right Side - Vehicle Image */}
+            {}
             <div className="lg:sticky lg:top-24 h-fit">
               <Card className="overflow-hidden shadow-lg">
                 <div className="relative">

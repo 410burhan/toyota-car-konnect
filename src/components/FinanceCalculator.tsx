@@ -40,7 +40,7 @@ export const FinanceCalculator = () => {
 
           <Card className="p-8 shadow-lg">
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Inputs */}
+              {}
               <div className="space-y-6">
                 <div>
                   <Label htmlFor="price" className="text-sm font-medium">
@@ -101,7 +101,7 @@ export const FinanceCalculator = () => {
                 </div>
               </div>
 
-              {/* Results */}
+              {}
               <div className="space-y-6">
                 <div className="bg-gradient-hero rounded-lg p-8 text-center text-white">
                   <Calculator className="w-12 h-12 mx-auto mb-4 opacity-90" />
